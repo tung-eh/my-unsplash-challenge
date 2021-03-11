@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 function App() {
-  return <p>My unsplash</p>;
+  return <p>My unsplash</p>
 }
 
-export default App;
+export default App
