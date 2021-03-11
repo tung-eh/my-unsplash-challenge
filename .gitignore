@@ -4,5 +4,8 @@ dist
 dist-ssr
 *.local
 
+#caches
+.firebase
+
 #logs
 firebase-debug.log
