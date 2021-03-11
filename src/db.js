@@ -16,4 +16,11 @@ const firebaseConfig = {
 // Initialize Cloud Firestore through Firebase
 firebase.initializeApp(firebaseConfig)
 
-export const db = firebase.firestore()
+const db = firebase.firestore()
+
+export const getPhotos = async () => {
+  let photos = []
+  const snapshot = await db.collection('photos').get()
+  snapshot.forEach((doc) => photos.push({ id: doc.id, ...doc.data() }))
+  return photos
+}
