@@ -10,7 +10,7 @@ const CustomStyles = createGlobalStyle`
 
   @media (min-width: ${theme`screens.md`}) {
     html {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 `
