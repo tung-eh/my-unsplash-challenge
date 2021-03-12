@@ -1,21 +1,16 @@
 import 'twin.macro'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 
-import { getPhotos } from './db'
+import Topbar from './components/Topbar'
 
 function App() {
-  useEffect(() => {
-    getPhotos().then(console.log)
-  }, [])
-
   return (
-    <>
-      <p>My unsplash</p>
-      <button tw="bg-gray-200 text-red-500 border border-red-500 hover:bg-red-500 hover:text-gray-100 p-1">
-        Click me
-      </button>
-    </>
+    <div tw="flex justify-center min-h-screen md:py-4">
+      <div tw="grid grid-template-rows[min-content 1fr] w-full max-w-screen-xl p-4">
+        <Topbar />
+      </div>
+    </div>
   )
 }
 
