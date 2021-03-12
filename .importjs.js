@@ -11,6 +11,7 @@ module.exports = {
       'useMemo',
       'forwardRef',
       'createContext',
+      'cloneElement',
       'memo',
     ],
   },
