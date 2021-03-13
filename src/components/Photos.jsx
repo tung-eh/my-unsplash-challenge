@@ -29,8 +29,6 @@ const MasonryItem = ({ label, url }) => {
 
     setGridRow('span ' + rowSpan)
     setHeight(`${(rowSpan - 1) * (rowHeight + rowGap)}px`)
-    // item.style.gridRowEnd = 'span ' + rowSpan
-    // image.style.height = `${(rowSpan - 1) * (rowHeight + rowGap)}px`
   }, [loaded, imageRef])
 
   return (
