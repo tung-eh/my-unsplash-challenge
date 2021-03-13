@@ -40,10 +40,7 @@ const MasonryItem = ({ label, url }) => {
       alt={label}
       ref={imageRef}
       onLoad={() => setLoaded(true)}
-      style={{
-        gridRowEnd: gridRow,
-        height,
-      }}
+      style={{ gridRow, height }}
     />
   )
 }
