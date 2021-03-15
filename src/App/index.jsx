@@ -2,8 +2,8 @@ import 'twin.macro'
 
 import React from 'react'
 
-import Photos from './components/Photos'
-import Topbar from './components/Topbar'
+import Photos from './Photos'
+import Topbar from './Topbar'
 
 function App() {
   return (

@@ -2,7 +2,7 @@ import 'twin.macro'
 
 import React from 'react'
 
-import Icon from '../atoms/Icon'
+import Icon from '../components/Icon'
 import logo from '../assets/images/logo.svg'
 
 const Topbar = () => (
