@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
+
 import tw from 'twin.macro'
 
 import Icon from './Icon'
@@ -8,7 +9,7 @@ const generateId = () => '_' + Math.random().toString(36).substr(2, 9)
 
 const TwInput = tw.input`border border-gray-400 focus:border-gray-900 rounded-lg text-sm p-4`
 
-const Input = ({ label, id, icon, fullWidth, ...props }) => {
+const Input = forwardRef(({ label, id, icon, fullWidth, ...props }, ref) => {
   const inputId = id || generateId()
 
   return (
@@ -23,11 +24,12 @@ const Input = ({ label, id, icon, fullWidth, ...props }) => {
         <TwInput
           css={[icon && tw`pl-14`, fullWidth ? tw`w-full` : tw`w-72`]}
           id={inputId}
+          ref={ref}
           {...props}
         />
       </div>
     </div>
   )
-}
+})
 
 export default Input

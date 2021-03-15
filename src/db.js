@@ -24,3 +24,8 @@ export const getPhotos = async () => {
   snapshot.forEach((doc) => photos.push({ id: doc.id, ...doc.data() }))
   return photos
 }
+
+export const addPhoto = async (photo) => {
+  const docRef = await db.collection('photos').add(photo)
+  console.log(docRef.id)
+}
