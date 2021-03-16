@@ -30,6 +30,19 @@ export const usePhotos = () => {
   return photos || []
 }
 
+export const useSearchPhotos = () => {
+  const [, setPhotos] = useContext(PhotosContext)
+
+  return useCallback(
+    (search) => {
+      getPhotos().then((photos) =>
+        setPhotos(photos.filter((photo) => photo.label.includes(search)))
+      )
+    },
+    [setPhotos]
+  )
+}
+
 export const useAddPhoto = () => {
   const [, setPhotos] = useContext(PhotosContext)
 

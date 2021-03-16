@@ -1,14 +1,13 @@
 import 'twin.macro'
 
-import { useForm } from 'react-hook-form'
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
-import { addPhoto } from '../db'
-import { useAddPhoto } from './shared/PhotosContext'
-import Button from '../components/Button'
-import Input from '../components/Input'
-import Modal, { useModalState } from '../components/Modal'
-import logo from '../assets/images/logo.svg'
+import { addPhoto } from '../../db'
+import { useAddPhoto } from '../shared/PhotosContext'
+import Button from '../../components/Button'
+import Input from '../../components/Input'
+import Modal, { useModalState } from '../../components/Modal'
 
 const AddPhotoButton = () => {
   const { isOpen, open, close } = useModalState()
@@ -61,14 +60,4 @@ const AddPhotoButton = () => {
   )
 }
 
-const Topbar = () => (
-  <div tw="flex items-center justify-between mb-20">
-    <div tw="flex gap-6 items-center">
-      <img src={logo} alt="logo" />
-      <Input icon="search" placeholder="Search by name" />
-    </div>
-    <AddPhotoButton />
-  </div>
-)
-
-export default Topbar
+export default AddPhotoButton
