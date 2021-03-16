@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import React from 'react'
 
 import { deletePhoto } from '../../db'
+import { useDeletePhoto } from '../shared/PhotosContext'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Modal, { useModalState } from '../../components/Modal'
@@ -12,19 +13,21 @@ const DeletePhotoButton = ({ photoId, ...props }) => {
   const { isOpen, open, close } = useModalState()
   const { register, handleSubmit } = useForm()
 
+  const deletePhotoFromState = useDeletePhoto()
+  const onSubmit = async () => {
+    await deletePhoto(photoId)
+
+    deletePhotoFromState(photoId)
+    close()
+  }
+
   return (
     <>
-      <button
-        onClick={() => {
-          console.log('zo')
-          open()
-        }}
-        {...props}
-      />
+      <button onClick={open} {...props} />
       <Modal open={isOpen} onClickOutside={close}>
         <form
           tw="width[38rem] bg-white rounded-xl text-gray-700 grid gap-6 py-6 px-8"
-          onSubmit={handleSubmit(() => deletePhoto(photoId).then(close))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <h1 tw="text-2xl">Are you sure?</h1>
           <Input

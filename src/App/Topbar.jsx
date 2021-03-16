@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import React from 'react'
 
 import { addPhoto } from '../db'
+import { useAddPhoto } from './shared/PhotosContext'
 import Button from '../components/Button'
 import Input from '../components/Input'
 import Modal, { useModalState } from '../components/Modal'
@@ -13,6 +14,14 @@ const AddPhotoButton = () => {
   const { isOpen, open, close } = useModalState()
   const { register, handleSubmit } = useForm()
 
+  const addPhotoToState = useAddPhoto()
+  const onSubmit = async (values) => {
+    const id = await addPhoto(values)
+
+    addPhotoToState({ id, ...values })
+    close()
+  }
+
   return (
     <>
       <Button tw="bg-green-500 hover:bg-green-600" onClick={open}>
@@ -21,7 +30,7 @@ const AddPhotoButton = () => {
       <Modal open={isOpen} onClickOutside={close}>
         <form
           tw="width[38rem] bg-white rounded-xl text-gray-700 grid gap-6 py-6 px-8"
-          onSubmit={handleSubmit((values) => addPhoto(values).then(close))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <h1 tw="text-2xl">Add a new photo</h1>
           <Input
