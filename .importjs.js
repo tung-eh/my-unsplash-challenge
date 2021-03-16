@@ -14,5 +14,6 @@ module.exports = {
       'cloneElement',
       'memo',
     ],
+    'react-hook-form': ['useForm'],
   },
 }
