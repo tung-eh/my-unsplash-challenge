@@ -6,6 +6,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ['"Noto Sans"', 'sans-serif'],
+        monts: ['Montserrat', 'sans-serif'],
       },
       colors: {
         gray: colors.trueGray,

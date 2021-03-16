@@ -1,4 +1,4 @@
-import 'twin.macro'
+import tw from 'twin.macro'
 
 import React, { useEffect, useRef, useState } from 'react'
 
@@ -8,13 +8,15 @@ const MasonryItem = ({ label, url }) => {
   const [loaded, setLoaded] = useState(false)
   const [gridRow, setGridRow] = useState('')
   const [height, setHeight] = useState('')
+  const ref = useRef()
   const imageRef = useRef()
 
   useEffect(() => {
+    const item = ref.current
     const image = imageRef.current
-    if (!image || !loaded) return
+    if (!item || !image || !loaded) return
 
-    const grid = image.parentElement
+    const grid = item.parentElement
 
     const rowHeight = parseInt(
       window.getComputedStyle(grid).getPropertyValue('grid-auto-rows')
@@ -22,6 +24,11 @@ const MasonryItem = ({ label, url }) => {
     const rowGap = parseInt(
       window.getComputedStyle(grid).getPropertyValue('grid-row-gap')
     )
+    console.log({
+      imageHeight: image.getBoundingClientRect().height,
+      rowGap,
+      rowHeight,
+    })
 
     const rowSpan = Math.ceil(
       (image.getBoundingClientRect().height + rowGap) / (rowHeight + rowGap)
@@ -29,17 +36,32 @@ const MasonryItem = ({ label, url }) => {
 
     setGridRow('span ' + rowSpan)
     setHeight(`${(rowSpan - 1) * (rowHeight + rowGap)}px`)
-  }, [loaded, imageRef])
+  }, [loaded, ref, imageRef])
 
   return (
-    <img
-      tw="rounded-2xl object-cover"
-      src={url}
-      alt={label}
-      ref={imageRef}
-      onLoad={() => setLoaded(true)}
+    <div
+      tw="relative rounded-2xl overflow-hidden"
+      className="group"
       style={{ gridRow, height }}
-    />
+      ref={ref}
+    >
+      <img
+        tw="object-cover w-full"
+        css={[height && tw`h-full`]}
+        src={url}
+        alt={label}
+        ref={imageRef}
+        onLoad={() => setLoaded(true)}
+      />
+      <button tw="hidden group-hover:flex absolute w-full h-full top-0 left-0 bg-black bg-opacity-40 flex-col justify-between font-monts text-left p-6">
+        <div tw="w-full flex justify-end">
+          <span tw="text-xs text-red-500 border border-red-500 rounded-full py-1 px-4">
+            delete
+          </span>
+        </div>
+        <p tw="text-white text-lg font-bold max-w-xs">{label}</p>
+      </button>
+    </div>
   )
 }
 
