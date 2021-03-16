@@ -20,12 +20,22 @@ const db = firebase.firestore()
 
 export const getPhotos = async () => {
   let photos = []
-  const snapshot = await db.collection('photos').get()
+  const snapshot = await db
+    .collection('photos')
+    .orderBy('createdAt', 'desc')
+    .get()
   snapshot.forEach((doc) => photos.push({ id: doc.id, ...doc.data() }))
   return photos
 }
 
 export const addPhoto = async (photo) => {
-  const docRef = await db.collection('photos').add(photo)
-  console.log(docRef.id)
+  const docRef = await db.collection('photos').add({
+    ...photo,
+    createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+  })
+  return docRef.id
+}
+
+export const deletePhoto = async (id) => {
+  await db.collection('photos').doc(id).delete()
 }
