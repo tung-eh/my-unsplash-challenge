@@ -23,7 +23,13 @@ const DeletePhotoButton = ({ photoId, ...props }) => {
 
   return (
     <>
-      <button onClick={open} {...props} />
+      <button
+        onClick={(e) => {
+          e.stopPropagation()
+          open()
+        }}
+        {...props}
+      />
       <Modal open={isOpen} onClickOutside={close}>
         <form
           tw="width[38rem] bg-white rounded-xl text-gray-700 grid gap-6 py-6 px-8"

@@ -4,6 +4,7 @@ import tw from 'twin.macro'
 
 import { usePhotos } from '../shared/PhotosContext'
 import DeletePhotoButton from './DeletePhotoButton'
+import PreviewPhotoButton from './PreviewPhotoButton'
 
 const MasonryItem = ({ id, label, url }) => {
   const [loaded, setLoaded] = useState(false)
@@ -49,17 +50,22 @@ const MasonryItem = ({ id, label, url }) => {
         ref={imageRef}
         onLoad={() => setLoaded(true)}
       />
-      <DeletePhotoButton
+      <PreviewPhotoButton
         tw="hidden group-hover:flex absolute w-full h-full top-0 left-0 bg-black bg-opacity-40 flex-col justify-between font-monts text-left p-6"
-        photoId={id}
+        id={id}
+        label={label}
+        url={url}
       >
         <div tw="w-full flex justify-end">
-          <span tw="text-xs text-red-500 border border-red-500 rounded-full py-1 px-4">
+          <DeletePhotoButton
+            tw="text-xs text-red-500 border border-red-500 rounded-full py-1 px-4"
+            photoId={id}
+          >
             delete
-          </span>
+          </DeletePhotoButton>
         </div>
         <p tw="text-white text-lg font-bold max-width[18rem]">{label}</p>
-      </DeletePhotoButton>
+      </PreviewPhotoButton>
     </div>
   )
 }

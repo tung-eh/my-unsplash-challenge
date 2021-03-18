@@ -3,13 +3,14 @@ import 'twin.macro'
 import React, { useCallback, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const appRoot = document.getElementById('root')
 const modalRoot = document.getElementById('modal-root')
 
 const useScrollLock = (lock) => {
   useEffect(() => {
     if (lock) {
       const scrollY = window.scrollY
-      Object.assign(document.body.style, {
+      Object.assign(appRoot.style, {
         position: 'fixed',
         top: `-${scrollY}px`,
         left: 0,
@@ -17,7 +18,7 @@ const useScrollLock = (lock) => {
       })
 
       return () => {
-        Object.assign(document.body.style, {
+        Object.assign(appRoot.style, {
           position: '',
           top: '',
           left: '',
@@ -34,7 +35,7 @@ const Modal = ({ children, open = false, onClickOutside, ...props }) => {
 
   const modal = open && (
     <div
-      tw="fixed top-0 left-0 w-full h-full bg-black bg-opacity-25 flex justify-center items-center"
+      tw="absolute top-0 left-0 min-w-full min-h-screen bg-black bg-opacity-25 flex justify-center items-center"
       onClick={onClickOutside}
     >
       <div {...props} onClick={(e) => e.stopPropagation()}>
