@@ -15,5 +15,6 @@ module.exports = {
       'memo',
     ],
     'react-hook-form': ['useForm'],
+    'framer-motion': ['AnimateSharedLayout', 'AnimatePresence', 'motion'],
   },
 }
