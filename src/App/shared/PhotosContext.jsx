@@ -27,7 +27,7 @@ export const PhotosContextProvider = ({ children }) => {
 export const usePhotos = () => {
   const [photos] = useContext(PhotosContext)
 
-  return photos || []
+  return photos
 }
 
 export const useSearchPhotos = () => {

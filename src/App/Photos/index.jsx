@@ -6,6 +6,7 @@ import tw from 'twin.macro'
 import { usePhotos } from '../shared/PhotosContext'
 import DeletePhotoButton from './DeletePhotoButton'
 import PreviewPhotoButton from './PreviewPhotoButton'
+import Spinner from '../../components/Spinner'
 
 const MasonryItem = ({ id, label, url }) => {
   const [loaded, setLoaded] = useState(false)
@@ -75,6 +76,10 @@ const MasonryItem = ({ id, label, url }) => {
 
 const Photos = () => {
   const photos = usePhotos()
+
+  if (!photos) {
+    return <Spinner tw="m-auto" />
+  }
 
   return (
     <div tw="grid grid-cols-3 grid-auto-rows[0] gap-12">
