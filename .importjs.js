@@ -1,4 +1,7 @@
 module.exports = {
+  aliases: {
+    tw: 'twin.macro',
+  },
   namedExports: {
     react: [
       'useState',
@@ -14,6 +17,7 @@ module.exports = {
       'cloneElement',
       'memo',
     ],
+    'twin.macro': ['css', 'styled'],
     'react-hook-form': ['useForm'],
     'framer-motion': ['AnimateSharedLayout', 'AnimatePresence', 'motion'],
   },
