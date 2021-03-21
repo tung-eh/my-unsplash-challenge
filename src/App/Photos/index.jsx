@@ -61,7 +61,7 @@ const MasonryItem = ({ id, label, url }) => {
         >
           <div tw="w-full flex justify-end">
             <DeletePhotoButton
-              tw="text-xs text-red-500 border border-red-500 rounded-full py-1 px-4"
+              tw="text-xs text-red-500 hover:text-white hover:bg-red-500 border border-red-500 rounded-full py-1 px-4"
               photoId={id}
             >
               delete
