@@ -30,7 +30,13 @@ const DeletePhotoButton = ({ photoId, ...props }) => {
         }}
         {...props}
       />
-      <Modal open={isOpen} onClickOutside={close}>
+      <Modal
+        open={isOpen}
+        onClickOutside={(e) => {
+          e.stopPropagation()
+          close()
+        }}
+      >
         <form
           tw="width[38rem] bg-white rounded-xl text-gray-700 grid gap-6 py-6 px-8"
           onSubmit={handleSubmit(onSubmit)}
