@@ -1,5 +1,6 @@
-import 'twin.macro'
+import tw from 'twin.macro'
 
+import { AnimatePresence, motion } from 'framer-motion'
 import React, { useCallback, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -30,21 +31,45 @@ const useScrollLock = (lock) => {
   }, [lock])
 }
 
-const Modal = ({ children, open = false, onClickOutside, ...props }) => {
+const Modal = ({
+  noMotion,
+  children,
+  open = false,
+  onClickOutside,
+  ...props
+}) => {
   useScrollLock(open)
 
+  const Container = tw(
+    noMotion ? 'div' : motion.div
+  )`absolute top-0 left-0 min-w-full min-h-screen bg-black bg-opacity-25 flex justify-center items-center`
+
+  const motionModal = (
+    <AnimatePresence>
+      {open && (
+        <Container
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={onClickOutside}
+        >
+          <div {...props} onClick={(e) => e.stopPropagation()}>
+            {children}
+          </div>
+        </Container>
+      )}
+    </AnimatePresence>
+  )
+
   const modal = open && (
-    <div
-      tw="absolute top-0 left-0 min-w-full min-h-screen bg-black bg-opacity-25 flex justify-center items-center"
-      onClick={onClickOutside}
-    >
+    <Container onClick={onClickOutside}>
       <div {...props} onClick={(e) => e.stopPropagation()}>
         {children}
       </div>
-    </div>
+    </Container>
   )
 
-  return ReactDOM.createPortal(modal, modalRoot)
+  return ReactDOM.createPortal(noMotion ? modal : motionModal, modalRoot)
 }
 
 export const useModalState = (defaultValue = false) => {

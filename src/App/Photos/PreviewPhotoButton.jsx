@@ -19,7 +19,7 @@ const PreviewPhotoButton = ({ id, label, url, setPreviewId, ...props }) => {
   return (
     <AnimatePresence>
       <button onClick={open} {...props} />
-      <Modal open={isOpen} onClickOutside={close}>
+      <Modal noMotion open={isOpen} onClickOutside={close}>
         <motion.div
           layoutId={id}
           initial={{ opacity: 0 }}
