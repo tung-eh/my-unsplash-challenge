@@ -53,15 +53,9 @@ const Modal = ({
           exit={{ opacity: 0 }}
           onClick={onClickOutside}
         >
-          <motion.div
-            initial={{ y: -1000 }}
-            animate={{ y: 0 }}
-            exit={{ y: -1000 }}
-            {...props}
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div {...props} onClick={(e) => e.stopPropagation()}>
             {children}
-          </motion.div>
+          </div>
         </Container>
       )}
     </AnimatePresence>
