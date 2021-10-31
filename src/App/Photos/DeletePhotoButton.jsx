@@ -47,6 +47,7 @@ const DeletePhotoButton = ({ photoId, ...props }) => {
             name="password"
             label="Password (myunsplash)"
             placeholder="****************"
+            autoFocus
             fullWidth
             ref={register({
               required: true,

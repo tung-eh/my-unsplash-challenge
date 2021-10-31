@@ -36,6 +36,7 @@ const AddPhotoButton = () => {
             name="label"
             label="Label"
             placeholder="an amzing photo"
+            autoFocus
             fullWidth
             ref={register({ required: true })}
           />
